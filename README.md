@@ -92,7 +92,3 @@ This test ensures that:
 #### **License**:
 
 MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-This update ensures the key network and container details are properly highlighted in the README. Let me know if you'd like to adjust any further details or add more explanations!
