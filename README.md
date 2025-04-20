@@ -1,7 +1,3 @@
-Here's an updated version of the README that includes the network and container details you requested:
-
----
-
 ### **Network Isolation and NAT Test Environment for Decentralized AI Programming**
 
 This repository sets up a simulated environment using Docker containers to test network isolation and NAT configurations. It is designed as a testbed for decentralized AI programming, where different containers represent local networks, NAT routers, and public services. The goal is to validate network connectivity, isolation, and routing rules within the context of a decentralized setup.
