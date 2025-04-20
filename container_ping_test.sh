@@ -42,7 +42,7 @@ declare -A router_ip=(
 echo "========== Start Ping Test =========="
 
 for src in "${containers[@]}"; do
-  echo "----- $src Testing -----"
+  echo "----- $src (${container_subnet[$src]}) Testing -----"
 
   # Ping public services (should pass)
   for dst in "${public_targets[@]}"; do
