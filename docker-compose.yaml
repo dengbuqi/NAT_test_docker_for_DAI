@@ -1,0 +1,194 @@
+version: '3.9'
+
+# +-------------------+       +-------------------+       +-------------------+
+# |   local_net1      |       |   local_net2      |       |   local_net3      |
+# |  (192.168.1.0/24) |       |  (192.168.2.0/24) |       |  (192.168.3.0/24) |
+# |                   |       |                   |       |                   |
+# |  P1_1, P1_2, P1_3 |       |  P2_1, P2_2, P2_3 |       |  P3_1, P3_2, P3_3 |
+# |        |          |       |        |          |       |        |          |
+# |        R1 (NAT)   |       |        R2 (NAT)   |       |        R3 (NAT)   |
+# +--------|----------+       +--------|----------+       +--------|----------+
+#          |                           |                           |
+#          +---------------------------+---------------------------+
+#                                      |
+#                            +---------|---------+
+#                            |     public_net    |
+#                            |   (10.0.0.0/24)  |
+#                            |                  |
+#                            |   P1, P2, P3     |
+#                            +-------------------+
+
+services:
+  # NAT Routers
+  R1: # Ubuntu Jammy image
+    image: ubuntu:jammy
+    container_name: R1
+    command: sh -c "apt update && apt install -y iptables iproute2 iputils-ping && tail -f /dev/null"
+    networks:
+      local_net1:
+        ipv4_address: 192.168.1.254
+      public_net:
+        ipv4_address: 10.0.0.11
+    cap_add:
+      - NET_ADMIN
+    privileged: true
+
+  R2: # alpine image
+    image: alpine
+    container_name: R2
+    command: sh -c "apk add iptables && tail -f /dev/null"
+    networks:
+      local_net2:
+        ipv4_address: 192.168.2.254
+      public_net:
+        ipv4_address: 10.0.0.12
+    cap_add:
+      - NET_ADMIN
+    privileged: true
+    
+  R3:
+    image: alpine
+    container_name: R3
+    command: sh -c "apk add iptables && tail -f /dev/null"
+    networks:
+      local_net3:
+        ipv4_address: 192.168.3.254
+      public_net:
+        ipv4_address: 10.0.0.13
+    cap_add:
+      - NET_ADMIN
+    privileged: true
+
+  # Clients in each local_net
+  # need to install iputils(alpine) or iputils-ping(ubuntu)
+  P1_1: # Ubuntu Jammy image
+    image: ubuntu:jammy
+    container_name: P1_1
+    command: sh -c "apt update && apt install -y iptables iproute2 iputils-ping && tail -f /dev/null"
+    networks:
+      local_net1:
+        ipv4_address: 192.168.1.11
+    privileged: true
+
+  P1_2: # alpine image
+    image: alpine
+    container_name: P1_2
+    command: sh -c "apk add iputils && tail -f /dev/null"
+    networks:
+      local_net1:
+        ipv4_address: 192.168.1.12
+    privileged: true
+
+  P1_3:
+    image: alpine
+    container_name: P1_3
+    command: sh -c "apk add iputils && tail -f /dev/null"
+    networks:
+      local_net1:
+        ipv4_address: 192.168.1.13
+    privileged: true
+
+  P2_1:
+    image: alpine
+    container_name: P2_1
+    command: sh -c "apk add iputils && tail -f /dev/null"
+    networks:
+      local_net2:
+        ipv4_address: 192.168.2.11
+    privileged: true
+
+  P2_2:
+    image: alpine
+    container_name: P2_2
+    command: sh -c "apk add iputils && tail -f /dev/null"
+    networks:
+      local_net2:
+        ipv4_address: 192.168.2.12
+    privileged: true
+
+  P2_3:
+    image: alpine
+    container_name: P2_3
+    command: sh -c "apk add iputils && tail -f /dev/null"
+    networks:
+      local_net2:
+        ipv4_address: 192.168.2.13
+    privileged: true
+
+  P3_1:
+    image: alpine
+    container_name: P3_1
+    command: sh -c "apk add iputils && tail -f /dev/null"
+    networks:
+      local_net3:
+        ipv4_address: 192.168.3.11
+    privileged: true
+
+  P3_2:
+    image: alpine
+    container_name: P3_2
+    command: sh -c "apk add iputils && tail -f /dev/null"
+    networks:
+      local_net3:
+        ipv4_address: 192.168.3.12
+    privileged: true
+
+  P3_3:
+    image: alpine
+    container_name: P3_3
+    command: sh -c "apk add iputils && tail -f /dev/null"
+    networks:
+      local_net3:
+        ipv4_address: 192.168.3.13
+    privileged: true
+
+  # Public services (P1, P2, P3)
+  # need to install iputils(alpine) or iputils-ping(ubuntu)
+  P1: # Ubuntu Jammy image
+    image: ubuntu:jammy
+    container_name: P1
+    command: sh -c "apt update && apt install -y iptables iproute2 iputils-ping && tail -f /dev/null"
+    networks:
+      public_net:
+        ipv4_address: 10.0.0.21
+    privileged: true
+
+  P2: # alpine image
+    image: alpine
+    container_name: P2
+    command: sh -c "apk add iputils && tail -f /dev/null"
+    networks:
+      public_net:
+        ipv4_address: 10.0.0.22
+    privileged: true
+
+  P3:
+    image: alpine
+    container_name: P3
+    command: sh -c "apk add iputils && tail -f /dev/null"
+    networks:
+      public_net:
+        ipv4_address: 10.0.0.23
+    privileged: true
+
+networks:
+  local_net1:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
+  local_net2:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.2.0/24
+  local_net3:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.3.0/24
+  public_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.0.0/24
