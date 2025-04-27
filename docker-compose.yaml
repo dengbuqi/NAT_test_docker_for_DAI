@@ -21,9 +21,12 @@ version: '3.9'
 services:
   # NAT Routers
   R1: # Ubuntu Jammy image
-    image: ubuntu:jammy
+    # image: ubuntu:jammy
+    # container_name: R1
+    # command: sh -c "apt update && apt install -y iptables iproute2 iputils-ping && tail -f /dev/null"
+    image: alpine
     container_name: R1
-    command: sh -c "apt update && apt install -y iptables iproute2 iputils-ping && tail -f /dev/null"
+    command: sh -c "apk add iptables && tail -f /dev/null"
     networks:
       local_net1:
         ipv4_address: 192.168.1.254
@@ -62,9 +65,9 @@ services:
   # Clients in each local_net
   # need to install iputils(alpine) or iputils-ping(ubuntu)
   P1_1: # Ubuntu Jammy image
-    image: ubuntu:jammy
+    image: alpine
     container_name: P1_1
-    command: sh -c "apt update && apt install -y iptables iproute2 iputils-ping && tail -f /dev/null"
+    command: sh -c "apk add iptables && tail -f /dev/null"
     networks:
       local_net1:
         ipv4_address: 192.168.1.11
@@ -145,31 +148,72 @@ services:
   # Public services (P1, P2, P3)
   # need to install iputils(alpine) or iputils-ping(ubuntu)
   P1: # Ubuntu Jammy image
-    image: ubuntu:jammy
+    image: dai:latest
     container_name: P1
-    command: sh -c "apt update && apt install -y iptables iproute2 iputils-ping && tail -f /dev/null"
+    command: sh -c "tail -f /dev/null"
     networks:
       public_net:
         ipv4_address: 10.0.0.21
     privileged: true
+    ports:
+      - "8888:52418"  
+    volumes:
+    - ./:/workspace
+    - ./exo_data:/root/.cache/exo
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all  # 让容器使用所有 GPU
+    # 如果你想指定特定 GPU，可以使用: NVIDIA_VISIBLE_DEVICES=0 或 NVIDIA_VISIBLE_DEVICES=0,1 来指定多个 GPU
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
 
   P2: # alpine image
-    image: alpine
+    image: dai:latest
     container_name: P2
-    command: sh -c "apk add iputils && tail -f /dev/null"
+    command: sh -c "tail -f /dev/null"
     networks:
       public_net:
         ipv4_address: 10.0.0.22
     privileged: true
+    volumes:
+    - ./:/workspace
+    - ./exo_data:/root/.cache/exo
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all  # 让容器使用所有 GPU
+    # 如果你想指定特定 GPU，可以使用: NVIDIA_VISIBLE_DEVICES=0 或 NVIDIA_VISIBLE_DEVICES=0,1 来指定多个 GPU
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
 
   P3:
-    image: alpine
+    image: dai:latest
     container_name: P3
-    command: sh -c "apk add iputils && tail -f /dev/null"
+    command: sh -c "tail -f /dev/null"
     networks:
       public_net:
         ipv4_address: 10.0.0.23
     privileged: true
+    volumes:
+    - ./:/workspace
+    - ./exo_data:/root/.cache/exo
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all  # 让容器使用所有 GPU
+    # 如果你想指定特定 GPU，可以使用: NVIDIA_VISIBLE_DEVICES=0 或 NVIDIA_VISIBLE_DEVICES=0,1 来指定多个 GPU
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
 
 networks:
   local_net1:

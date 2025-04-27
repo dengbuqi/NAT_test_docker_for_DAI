@@ -1,0 +1,397 @@
+/opt/conda/lib/python3.12/site-packages/google/protobuf/runtime_version.py:112: UserWarning: Protobuf gencode version 5.27.2 is older than the runtime version 5.28.1 at node_service.proto. Please avoid checked-in Protobuf gencode that can be obsolete.
+  warnings.warn(
+The cache for model files in Transformers v4.22.0 has been updated. Migrating your old cache. This is a one-time only operation. You can interrupt this and resume the migration later on by calling `transformers.utils.move_cache()`.
+0it [00:00, ?it/s]0it [00:00, ?it/s]
+  0%|                                                   | 0/292 [00:00<?, ?it/s]ram used:  0.00 GB, layers.0.attention.wq.weight                      :   0%| | ram used:  0.00 GB, layers.8.attention.wo.weight                      :  26%|▎| Task exception was never retrieved
+future: <Task finished name='Task-119' coro=<TinygradDynamicShardInferenceEngine.ensure_shard() done, defined at /exo/exo/inference/tinygrad/inference.py:143> exception=OSError("/opt/conda/bin/../lib/libstdc++.so.6: version `GLIBCXX_3.4.30' not found (required by /usr/lib/x86_64-linux-gnu/libLLVM-15.so.1)")>
+Traceback (most recent call last):
+  File "/exo/exo/inference/tinygrad/inference.py", line 152, in ensure_shard
+    model_shard = await loop.run_in_executor(self.executor, build_transformer, model_path, shard, parameters)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/exo/exo/inference/tinygrad/inference.py", line 59, in build_transformer
+    load_state_dict(model, weights, strict=False, consume=False)  # consume=True
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/tinygrad/nn/state.py", line 159, in load_state_dict
+    if realize: v.realize()
+                ^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/tinygrad/tensor.py", line 4227, in _wrapper
+    ret = fn(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/tinygrad/tensor.py", line 270, in realize
+    run_schedule(*self.schedule_with_vars(*lst), do_update_stats=do_update_stats)
+  File "/opt/conda/lib/python3.12/site-packages/tinygrad/engine/realize.py", line 168, in run_schedule
+    for si, ei in lower_schedule(schedule):
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/tinygrad/engine/realize.py", line 161, in lower_schedule
+    raise e
+  File "/opt/conda/lib/python3.12/site-packages/tinygrad/engine/realize.py", line 155, in lower_schedule
+    try: yield (si, lower_schedule_item(si))
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/tinygrad/engine/realize.py", line 150, in lower_schedule_item
+    def lower_schedule_item(si:ScheduleItem) -> ExecItem: return ExecItem(*cast(tuple[Runner,list], si_lowerer.rewrite(si.ast, si.bufs)), si.metadata)
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/tinygrad/ops.py", line 867, in rewrite
+    if (ret:=match(uop, ctx)) is not None: return ret
+             ^^^^^^^^^^^^^^^
+  File "<string>", line 3, in compiled_match
+  File "/opt/conda/lib/python3.12/site-packages/tinygrad/engine/realize.py", line 147, in <lambda>
+    if hasattr(Device[ctx[0].device].allocator, '_transfer') and all_same([x.device.split(":")[0] for x in ctx]) \
+               ~~~~~~^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/tinygrad/device.py", line 22, in __getitem__
+    def __getitem__(self, ix:str) -> Compiled: return self.__get_canonicalized_item(self.canonicalize(ix))
+                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/tinygrad/device.py", line 28, in __get_canonicalized_item
+    ret = [cls for cname, cls in inspect.getmembers(importlib.import_module(f'tinygrad.runtime.ops_{x.lower()}')) \
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/conda/lib/python3.12/site-packages/tinygrad/runtime/ops_llvm.py", line 5, in <module>
+    import tinygrad.runtime.autogen.llvm as llvm
+  File "/opt/conda/lib/python3.12/site-packages/tinygrad/runtime/autogen/llvm.py", line 149, in <module>
+    _libraries['llvm'] = ctypes.CDLL(llvm_support.LLVM_PATH) #  ctypes.CDLL('llvm')
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/ctypes/__init__.py", line 379, in __init__
+    self._handle = _dlopen(self._name, mode)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: /opt/conda/bin/../lib/libstdc++.so.6: version `GLIBCXX_3.4.30' not found (required by /usr/lib/x86_64-linux-gnu/libLLVM-15.so.1)
+  0%|                                                   | 0/292 [00:00<?, ?it/s]ram used:  0.00 GB, layers.0.attention.wq.weight                      :   0%| | Traceback (most recent call last):
+  File "/opt/conda/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/exo/exo/networking/grpc/grpc_peer_handle.py", line 65, in connect
+    await asyncio.wait_for(self.channel.channel_ready(), timeout=10.0)
+  File "/opt/conda/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/grpc/aio/_channel.py", line 481, in channel_ready
+    await self.wait_for_state_change(state)
+  File "/opt/conda/lib/python3.12/site-packages/grpc/aio/_channel.py", line 474, in wait_for_state_change
+    assert await self._channel.watch_connectivity_state(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "src/python/grpcio/grpc/_cython/_cygrpc/aio/channel.pyx.pxi", line 97, in watch_connectivity_state
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/exo/exo/orchestration/node.py", line 498, in connect_with_timeout
+    await asyncio.wait_for(peer.connect(), timeout)
+  File "/opt/conda/lib/python3.12/asyncio/tasks.py", line 519, in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/asyncio/timeouts.py", line 115, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/exo/exo/networking/grpc/grpc_peer_handle.py", line 178, in collect_topology
+    await self._ensure_connected()
+  File "/exo/exo/networking/grpc/grpc_peer_handle.py", line 79, in _ensure_connected
+    await asyncio.wait_for(self.connect(), timeout=10.0)
+  File "/opt/conda/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/exo/exo/networking/grpc/grpc_peer_handle.py", line 65, in connect
+    await asyncio.wait_for(self.channel.channel_ready(), timeout=10.0)
+  File "/opt/conda/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/grpc/aio/_channel.py", line 481, in channel_ready
+    await self.wait_for_state_change(state)
+  File "/opt/conda/lib/python3.12/site-packages/grpc/aio/_channel.py", line 474, in wait_for_state_change
+    assert await self._channel.watch_connectivity_state(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "src/python/grpcio/grpc/_cython/_cygrpc/aio/channel.pyx.pxi", line 97, in watch_connectivity_state
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/exo/exo/orchestration/node.py", line 563, in collect_topology
+    other_topology = await asyncio.wait_for(peer.collect_topology(visited, max_depth=max_depth - 1), timeout=5.0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/asyncio/tasks.py", line 519, in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/asyncio/timeouts.py", line 115, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError
+Selected inference engine: None
+[93m
+  _____  _____  
+ / _ \ \/ / _ \ 
+|  __/>  < (_) |
+ \___/_/\_\___/ 
+    [0m
+Detected system: Linux
+Inference engine name after selection: tinygrad
+Using inference engine: TinygradDynamicShardInferenceEngine with shard downloader: SingletonShardDownloader
+Chat interface started:
+ - ]8;;http://127.0.0.1:52418\http://127.0.0.1:52418]8;;\
+ - ]8;;http://10.0.0.22:52418\http://10.0.0.22:52418]8;;\
+ChatGPT API endpoint served at:
+ - ]8;;http://127.0.0.1:52418/v1/chat/completions\http://127.0.0.1:52418/v1/chat/completions]8;;\
+ - ]8;;http://10.0.0.22:52418/v1/chat/completions\http://10.0.0.22:52418/v1/chat/completions]8;;\
+has_read=True, has_write=True
+Discovered peers: []
+Starting task to find peers from config...
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' not found in known peers. Adding.
+Discovered peers: []
+Discovered peers: []
+Discovered peers: []
+Discovered peers: []
+peer_id='P1' at 10.0.0.21:52415 is not healthy. Removing.
+Checking peer peer_id='P3' at 10.0.0.23:52415
+peer_id='P3' not found in known peers. Adding.
+peer_id='P3' at 10.0.0.23:52415 is healthy.
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Current known peers: ['P3']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' not found in known peers. Adding.
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P3' at 10.0.0.23:52415
+peer_id='P3' at 10.0.0.23:52415 is healthy.
+Discovered peers: ['P1', 'P3']
+Discovered peers: ['P1', 'P3']
+Current known peers: ['P1', 'P3']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P3' at 10.0.0.23:52415
+peer_id='P3' at 10.0.0.23:52415 is healthy.
+Discovered peers: ['P1', 'P3']
+Discovered peers: ['P1', 'P3']
+Discovered peers: ['P1', 'P3']
+Current known peers: ['P1', 'P3']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P3' at 10.0.0.23:52415
+peer_id='P3' at 10.0.0.23:52415 is healthy.
+Discovered peers: ['P1', 'P3']
+loaded weights in 396.73 ms, 0.03 GB loaded at 0.08 GB/s
+Discovered peers: ['P1', 'P3']
+Current known peers: ['P1', 'P3']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P3' at 10.0.0.23:52415
+peer_id='P3' at 10.0.0.23:52415 is healthy.
+Discovered peers: ['P1', 'P3']
+Discovered peers: ['P1', 'P3']
+Discovered peers: ['P1', 'P3']
+Current known peers: ['P1', 'P3']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P3' at 10.0.0.23:52415
+peer_id='P3' at 10.0.0.23:52415 is healthy.
+Discovered peers: ['P1', 'P3']
+Discovered peers: ['P1', 'P3']
+Current known peers: ['P1', 'P3']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P3' at 10.0.0.23:52415
+peer_id='P3' at 10.0.0.23:52415 is healthy.
+Discovered peers: ['P1', 'P3']
+Discovered peers: ['P1', 'P3']
+Discovered peers: ['P1', 'P3']
+Current known peers: ['P1', 'P3']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P3' at 10.0.0.23:52415
+peer_id='P3' at 10.0.0.23:52415 is healthy.
+Discovered peers: ['P1', 'P3']
+Discovered peers: ['P1', 'P3']
+Current known peers: ['P1', 'P3']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P3' at 10.0.0.23:52415
+peer_id='P3' at 10.0.0.23:52415 is healthy.
+Discovered peers: ['P1', 'P3']
+Discovered peers: ['P1', 'P3']
+Discovered peers: ['P1', 'P3']
+Current known peers: ['P1', 'P3']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P3' at 10.0.0.23:52415
+peer_id='P3' at 10.0.0.23:52415 is healthy.
+Discovered peers: ['P1', 'P3']
+Discovered peers: ['P1', 'P3']
+Current known peers: ['P1', 'P3']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P3' at 10.0.0.23:52415
+peer_id='P3' at 10.0.0.23:52415 is healthy.
+Discovered peers: ['P1', 'P3']
+Discovered peers: ['P1', 'P3']
+Current known peers: ['P1', 'P3']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P3' at 10.0.0.23:52415
+peer_id='P3' at 10.0.0.23:52415 is healthy.
+Discovered peers: ['P1', 'P3']
+Discovered peers: ['P1', 'P3']
+Discovered peers: ['P1', 'P3']
+Current known peers: ['P1', 'P3']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P3' at 10.0.0.23:52415
+peer_id='P3' at 10.0.0.23:52415 is healthy.
+Discovered peers: ['P1', 'P3']
+Discovered peers: ['P1', 'P3']
+Current known peers: ['P1', 'P3']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P3' at 10.0.0.23:52415
+peer_id='P3' at 10.0.0.23:52415 is healthy.
+Discovered peers: ['P1', 'P3']
+Discovered peers: ['P1', 'P3']
+Discovered peers: ['P1', 'P3']
+Current known peers: ['P1', 'P3']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+Error connecting peer P1@10.0.0.21:52415: 
+Error collecting topology from P1: 
+peer_id='P1' at 10.0.0.21:52415 is not healthy. Removing.
+Checking peer peer_id='P3' at 10.0.0.23:52415
+peer_id='P3' at 10.0.0.23:52415 is healthy.
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Current known peers: ['P3']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' not found in known peers. Adding.
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+peer_id='P1' at 10.0.0.21:52415 is not healthy. Removing.
+Checking peer peer_id='P3' at 10.0.0.23:52415
+peer_id='P3' at 10.0.0.23:52415 is healthy.
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Current known peers: ['P3']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' not found in known peers. Adding.
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+peer_id='P1' at 10.0.0.21:52415 is not healthy. Removing.
+Checking peer peer_id='P3' at 10.0.0.23:52415
+peer_id='P3' at 10.0.0.23:52415 is healthy.
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Current known peers: ['P3']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' not found in known peers. Adding.
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+peer_id='P1' at 10.0.0.21:52415 is not healthy. Removing.
+Checking peer peer_id='P3' at 10.0.0.23:52415
+peer_id='P3' at 10.0.0.23:52415 is healthy.
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Current known peers: ['P3']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' not found in known peers. Adding.
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+peer_id='P1' at 10.0.0.21:52415 is not healthy. Removing.
+Checking peer peer_id='P3' at 10.0.0.23:52415
+peer_id='P3' at 10.0.0.23:52415 is healthy.
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Current known peers: ['P3']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' not found in known peers. Adding.
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+peer_id='P1' at 10.0.0.21:52415 is not healthy. Removing.
+Checking peer peer_id='P3' at 10.0.0.23:52415
+peer_id='P3' at 10.0.0.23:52415 is healthy.
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Discovered peers: ['P3']
+Current known peers: ['P3']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' not found in known peers. Adding.
+Discovered peers: ['P3']
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P3' at 10.0.0.23:52415
+peer_id='P3' at 10.0.0.23:52415 is healthy.
+Discovered peers: ['P1', 'P3']
+Discovered peers: ['P1', 'P3']
+Discovered peers: ['P1', 'P3']
+Current known peers: ['P1', 'P3']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.Traceback (most recent call last):
+  File "/opt/conda/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/exo/exo/networking/grpc/grpc_peer_handle.py", line 180, in collect_topology
+    response = await self.stub.CollectTopology(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/grpc/aio/_call.py", line 308, in __await__
+    response = yield from self._call_response
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/exo/exo/orchestration/node.py", line 563, in collect_topology
+    other_topology = await asyncio.wait_for(peer.collect_topology(visited, max_depth=max_depth - 1), timeout=5.0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/asyncio/tasks.py", line 519, in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/asyncio/timeouts.py", line 115, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/exo/exo/networking/grpc/grpc_peer_handle.py", line 180, in collect_topology
+    response = await self.stub.CollectTopology(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/grpc/aio/_call.py", line 308, in __await__
+    response = yield from self._call_response
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/exo/exo/orchestration/node.py", line 563, in collect_topology
+    other_topology = await asyncio.wait_for(peer.collect_topology(visited, max_depth=max_depth - 1), timeout=5.0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/asyncio/tasks.py", line 519, in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/asyncio/timeouts.py", line 115, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError

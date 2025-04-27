@@ -1,0 +1,12 @@
+The cache for model files in Transformers v4.22.0 has been updated. Migrating your old cache. This is a one-time only operation. You can interrupt this and resume the migration later on by calling `transformers.utils.move_cache()`.
+0it [00:00, ?it/s]0it [00:00, ?it/s]
+Task exception was never retrieved
+future: <Task finished name='Task-5' coro=<ChatGPTAPI.run() done, defined at /opt/conda/lib/python3.12/site-packages/exo/api/chatgpt_api.py:626> exception=OSError(98, "error while attempting to bind on address ('0.0.0.0', 52415): address already in use")>
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.12/site-packages/exo/api/chatgpt_api.py", line 630, in run
+    await site.start()
+  File "/opt/conda/lib/python3.12/site-packages/aiohttp/web_runner.py", line 119, in start
+    self._server = await loop.create_server(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "uvloop/loop.pyx", line 1794, in create_server
+OSError: [Errno 98] error while attempting to bind on address ('0.0.0.0', 52415): address already in use

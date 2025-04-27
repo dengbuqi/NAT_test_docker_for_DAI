@@ -1,0 +1,335 @@
+/opt/conda/lib/python3.12/site-packages/google/protobuf/runtime_version.py:112: UserWarning: Protobuf gencode version 5.27.2 is older than the runtime version 5.28.1 at node_service.proto. Please avoid checked-in Protobuf gencode that can be obsolete.
+  warnings.warn(
+The cache for model files in Transformers v4.22.0 has been updated. Migrating your old cache. This is a one-time only operation. You can interrupt this and resume the migration later on by calling `transformers.utils.move_cache()`.
+0it [00:00, ?it/s]0it [00:00, ?it/s]
+  0%|                                                   | 0/292 [00:00<?, ?it/s]  0%|                                                   | 0/292 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/opt/conda/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/exo/exo/networking/grpc/grpc_peer_handle.py", line 65, in connect
+    await asyncio.wait_for(self.channel.channel_ready(), timeout=10.0)
+  File "/opt/conda/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/grpc/aio/_channel.py", line 481, in channel_ready
+    await self.wait_for_state_change(state)
+  File "/opt/conda/lib/python3.12/site-packages/grpc/aio/_channel.py", line 474, in wait_for_state_change
+    assert await self._channel.watch_connectivity_state(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "src/python/grpcio/grpc/_cython/_cygrpc/aio/channel.pyx.pxi", line 97, in watch_connectivity_state
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/exo/exo/orchestration/node.py", line 498, in connect_with_timeout
+    await asyncio.wait_for(peer.connect(), timeout)
+  File "/opt/conda/lib/python3.12/asyncio/tasks.py", line 519, in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/asyncio/timeouts.py", line 115, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/exo/exo/networking/grpc/grpc_peer_handle.py", line 178, in collect_topology
+    await self._ensure_connected()
+  File "/exo/exo/networking/grpc/grpc_peer_handle.py", line 79, in _ensure_connected
+    await asyncio.wait_for(self.connect(), timeout=10.0)
+  File "/opt/conda/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/exo/exo/networking/grpc/grpc_peer_handle.py", line 65, in connect
+    await asyncio.wait_for(self.channel.channel_ready(), timeout=10.0)
+  File "/opt/conda/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/grpc/aio/_channel.py", line 481, in channel_ready
+    await self.wait_for_state_change(state)
+  File "/opt/conda/lib/python3.12/site-packages/grpc/aio/_channel.py", line 474, in wait_for_state_change
+    assert await self._channel.watch_connectivity_state(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "src/python/grpcio/grpc/_cython/_cygrpc/aio/channel.pyx.pxi", line 97, in watch_connectivity_state
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/exo/exo/orchestration/node.py", line 563, in collect_topology
+    other_topology = await asyncio.wait_for(peer.collect_topology(visited, max_depth=max_depth - 1), timeout=5.0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/asyncio/tasks.py", line 519, in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/asyncio/timeouts.py", line 115, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError
+Selected inference engine: None
+[93m
+  _____  _____  
+ / _ \ \/ / _ \ 
+|  __/>  < (_) |
+ \___/_/\_\___/ 
+    [0m
+Detected system: Linux
+Inference engine name after selection: tinygrad
+Using inference engine: TinygradDynamicShardInferenceEngine with shard downloader: SingletonShardDownloader
+Chat interface started:
+ - ]8;;http://10.0.0.23:52418\http://10.0.0.23:52418]8;;\
+ - ]8;;http://127.0.0.1:52418\http://127.0.0.1:52418]8;;\
+ChatGPT API endpoint served at:
+ - ]8;;http://10.0.0.23:52418/v1/chat/completions\http://10.0.0.23:52418/v1/chat/completions]8;;\
+ - ]8;;http://127.0.0.1:52418/v1/chat/completions\http://127.0.0.1:52418/v1/chat/completions]8;;\
+has_read=True, has_write=True
+Discovered peers: []
+Starting task to find peers from config...
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' not found in known peers. Adding.
+Discovered peers: []
+Discovered peers: []
+Discovered peers: []
+Discovered peers: []
+peer_id='P1' at 10.0.0.21:52415 is not healthy. Removing.
+Checking peer peer_id='P2' at 10.0.0.22:52415
+peer_id='P2' not found in known peers. Adding.
+peer_id='P2' at 10.0.0.22:52415 is healthy.
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Current known peers: ['P2']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' not found in known peers. Adding.
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P2' at 10.0.0.22:52415
+peer_id='P2' at 10.0.0.22:52415 is healthy.
+Discovered peers: ['P1', 'P2']
+Discovered peers: ['P1', 'P2']
+Current known peers: ['P1', 'P2']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P2' at 10.0.0.22:52415
+peer_id='P2' at 10.0.0.22:52415 is healthy.
+Discovered peers: ['P1', 'P2']
+Discovered peers: ['P1', 'P2']
+Discovered peers: ['P1', 'P2']
+Current known peers: ['P1', 'P2']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P2' at 10.0.0.22:52415
+peer_id='P2' at 10.0.0.22:52415 is healthy.
+Discovered peers: ['P1', 'P2']
+loaded weights in 414.27 ms, 0.03 GB loaded at 0.08 GB/s
+Discovered peers: ['P1', 'P2']
+Current known peers: ['P1', 'P2']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P2' at 10.0.0.22:52415
+peer_id='P2' at 10.0.0.22:52415 is healthy.
+Discovered peers: ['P1', 'P2']
+Discovered peers: ['P1', 'P2']
+Discovered peers: ['P1', 'P2']
+Current known peers: ['P1', 'P2']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P2' at 10.0.0.22:52415
+peer_id='P2' at 10.0.0.22:52415 is healthy.
+Discovered peers: ['P1', 'P2']
+Discovered peers: ['P1', 'P2']
+Current known peers: ['P1', 'P2']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P2' at 10.0.0.22:52415
+peer_id='P2' at 10.0.0.22:52415 is healthy.
+Discovered peers: ['P1', 'P2']
+Discovered peers: ['P1', 'P2']
+Discovered peers: ['P1', 'P2']
+Current known peers: ['P1', 'P2']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P2' at 10.0.0.22:52415
+peer_id='P2' at 10.0.0.22:52415 is healthy.
+Discovered peers: ['P1', 'P2']
+Discovered peers: ['P1', 'P2']
+Current known peers: ['P1', 'P2']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P2' at 10.0.0.22:52415
+peer_id='P2' at 10.0.0.22:52415 is healthy.
+Discovered peers: ['P1', 'P2']
+Discovered peers: ['P1', 'P2']
+Current known peers: ['P1', 'P2']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P2' at 10.0.0.22:52415
+peer_id='P2' at 10.0.0.22:52415 is healthy.
+Discovered peers: ['P1', 'P2']
+Discovered peers: ['P1', 'P2']
+Discovered peers: ['P1', 'P2']
+Current known peers: ['P1', 'P2']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P2' at 10.0.0.22:52415
+peer_id='P2' at 10.0.0.22:52415 is healthy.
+Discovered peers: ['P1', 'P2']
+Discovered peers: ['P1', 'P2']
+Current known peers: ['P1', 'P2']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P2' at 10.0.0.22:52415
+peer_id='P2' at 10.0.0.22:52415 is healthy.
+Discovered peers: ['P1', 'P2']
+Discovered peers: ['P1', 'P2']
+Discovered peers: ['P1', 'P2']
+Current known peers: ['P1', 'P2']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P2' at 10.0.0.22:52415
+peer_id='P2' at 10.0.0.22:52415 is healthy.
+Discovered peers: ['P1', 'P2']
+Discovered peers: ['P1', 'P2']
+Current known peers: ['P1', 'P2']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P2' at 10.0.0.22:52415
+peer_id='P2' at 10.0.0.22:52415 is healthy.
+Discovered peers: ['P1', 'P2']
+Discovered peers: ['P1', 'P2']
+Discovered peers: ['P1', 'P2']
+Current known peers: ['P1', 'P2']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+Error connecting peer P1@10.0.0.21:52415: 
+peer_id='P1' at 10.0.0.21:52415 is not healthy. Removing.
+Checking peer peer_id='P2' at 10.0.0.22:52415
+Error collecting topology from P1: 
+peer_id='P2' at 10.0.0.22:52415 is healthy.
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Current known peers: ['P2']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' not found in known peers. Adding.
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+peer_id='P1' at 10.0.0.21:52415 is not healthy. Removing.
+Checking peer peer_id='P2' at 10.0.0.22:52415
+peer_id='P2' at 10.0.0.22:52415 is healthy.
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Current known peers: ['P2']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' not found in known peers. Adding.
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+peer_id='P1' at 10.0.0.21:52415 is not healthy. Removing.
+Checking peer peer_id='P2' at 10.0.0.22:52415
+peer_id='P2' at 10.0.0.22:52415 is healthy.
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Current known peers: ['P2']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' not found in known peers. Adding.
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+peer_id='P1' at 10.0.0.21:52415 is not healthy. Removing.
+Checking peer peer_id='P2' at 10.0.0.22:52415
+peer_id='P2' at 10.0.0.22:52415 is healthy.
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Current known peers: ['P2']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' not found in known peers. Adding.
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+peer_id='P1' at 10.0.0.21:52415 is not healthy. Removing.
+Checking peer peer_id='P2' at 10.0.0.22:52415
+peer_id='P2' at 10.0.0.22:52415 is healthy.
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Current known peers: ['P2']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' not found in known peers. Adding.
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+peer_id='P1' at 10.0.0.21:52415 is not healthy. Removing.
+Checking peer peer_id='P2' at 10.0.0.22:52415
+peer_id='P2' at 10.0.0.22:52415 is healthy.
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Discovered peers: ['P2']
+Current known peers: ['P2']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' not found in known peers. Adding.
+Discovered peers: ['P2']
+peer_id='P1' at 10.0.0.21:52415 is healthy.
+Checking peer peer_id='P2' at 10.0.0.22:52415
+peer_id='P2' at 10.0.0.22:52415 is healthy.
+Discovered peers: ['P1', 'P2']
+Discovered peers: ['P1', 'P2']
+Discovered peers: ['P1', 'P2']
+Current known peers: ['P1', 'P2']
+Checking peer peer_id='P1' at 10.0.0.21:52415
+peer_id='P1' at 10.0.0.21:52415 is healthy.Traceback (most recent call last):
+  File "/opt/conda/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/exo/exo/networking/grpc/grpc_peer_handle.py", line 180, in collect_topology
+    response = await self.stub.CollectTopology(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/grpc/aio/_call.py", line 308, in __await__
+    response = yield from self._call_response
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/exo/exo/orchestration/node.py", line 563, in collect_topology
+    other_topology = await asyncio.wait_for(peer.collect_topology(visited, max_depth=max_depth - 1), timeout=5.0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/asyncio/tasks.py", line 519, in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/asyncio/timeouts.py", line 115, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/exo/exo/networking/grpc/grpc_peer_handle.py", line 180, in collect_topology
+    response = await self.stub.CollectTopology(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/grpc/aio/_call.py", line 308, in __await__
+    response = yield from self._call_response
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/exo/exo/orchestration/node.py", line 563, in collect_topology
+    other_topology = await asyncio.wait_for(peer.collect_topology(visited, max_depth=max_depth - 1), timeout=5.0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/asyncio/tasks.py", line 519, in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/asyncio/timeouts.py", line 115, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError
